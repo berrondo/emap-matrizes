@@ -12,7 +12,7 @@ class TesteMatriz(unittest.TestCase):
     def teste_colunas(self):
         A = Matriz([[1, 1], 
                     [2, 2]])
-        self.assertEqual(A.colunas(), [[1, 2], [1, 2]])
+        self.assertEqual(A.colunas, [[1, 2], [1, 2]])
         self.assertEqual(A.coluna(0), [1, 2])
         self.assertEqual(A.coluna(1), [1, 2])
         
@@ -20,7 +20,7 @@ class TesteMatriz(unittest.TestCase):
         A = Matriz([['A', 'B', 'C'], 
                     ['D', 'E', 'F'],
                     ['G', 'H', 'I']])
-        self.assertEqual(A.colunas(), [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
+        self.assertEqual(A.colunas, [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
         self.assertEqual(A.coluna(0), ['A', 'D', 'G'])
         self.assertEqual(A.coluna(1), ['B', 'E', 'H'])
         self.assertEqual(A.coluna(2), ['C', 'F', 'I'])

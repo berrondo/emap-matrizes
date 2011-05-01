@@ -19,6 +19,7 @@ class Matriz(object):
     def linha(self, n):
         return self.linhas[n]
         
+    @property
     def colunas(self):
         colunas = copy.deepcopy(self.linhas)
         for i, linha in enumerate(self.linhas):
@@ -27,8 +28,8 @@ class Matriz(object):
         return colunas
         
     def coluna(self, n):
-        return self.colunas()[n]
+        return self.colunas[n]
         
     def transposta(self):
-        return Matriz(self.colunas())
+        return Matriz(self.colunas)
         
