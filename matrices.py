@@ -13,7 +13,7 @@ class Matriz(object):
         '''
         
     def __cmp__(self, other):
-        if self.__repr__() == other.__repr__(): return 0
+        if self.linhas == other.linhas: return 0
         else: return 1
         
     def linha(self, n):
