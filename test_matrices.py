@@ -14,25 +14,7 @@ class TesteMatriz_2_x_2(unittest.TestCase):
         self.assertEqual(self.A.colunas, [[1, 2], [1, 2]])
         self.assertEqual(self.A.coluna(0), [1, 2])
         self.assertEqual(self.A.coluna(1), [1, 2])
-        
-    def teste_colunas_da_matriz_3_x_3(self):
-        A = Matriz([['A', 'B', 'C'], 
-                    ['D', 'E', 'F'],
-                    ['G', 'H', 'I']])
-        self.assertEqual(A.colunas, [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
-        self.assertEqual(A.coluna(0), ['A', 'D', 'G'])
-        self.assertEqual(A.coluna(1), ['B', 'E', 'H'])
-        self.assertEqual(A.coluna(2), ['C', 'F', 'I'])
-        
-    def teste_transposta_da_matriz_3_x_3(self):
-        A = Matriz([['A', 'B', 'C'], 
-                    ['D', 'E', 'F'],
-                    ['G', 'H', 'I']])
-        AT = Matriz([['A', 'D', 'G'], 
-                     ['B', 'E', 'H'], 
-                     ['C', 'F', 'I']])
-        self.assertEqual(A.transposta(), AT)
-        
+
     def teste_comparacao(self):
         B = self.A.transposta().transposta()
         self.assertEqual(self.A, B)
@@ -42,6 +24,21 @@ class TesteMatriz_2_x_2(unittest.TestCase):
                      [1, 2]])
         self.assertEqual(self.A.transposta(), AT)
 
-                    
+class TesteMatriz_3_x_3(unittest.TestCase):
+    A = Matriz([['A', 'B', 'C'], 
+                ['D', 'E', 'F'],
+                ['G', 'H', 'I']])
+    def teste_colunas_da_matriz_3_x_3(self):
+        self.assertEqual(self.A.colunas, [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
+        self.assertEqual(self.A.coluna(0), ['A', 'D', 'G'])
+        self.assertEqual(self.A.coluna(1), ['B', 'E', 'H'])
+        self.assertEqual(self.A.coluna(2), ['C', 'F', 'I'])
+        
+    def teste_transposta_da_matriz_3_x_3(self):
+        AT = Matriz([['A', 'D', 'G'], 
+                     ['B', 'E', 'H'], 
+                     ['C', 'F', 'I']])
+        self.assertEqual(self.A.transposta(), AT)
+        
         
 unittest.main()
