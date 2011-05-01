@@ -25,6 +25,9 @@ class Matriz(object):
     
     @property
     def quadrada(self): return self.n == self.m
+    
+    @property
+    def simetrica(self): return self.linhas == self.transposta().linhas
         
     def linha(self, n):
         return self.linhas[n]

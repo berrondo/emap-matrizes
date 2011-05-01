@@ -63,6 +63,12 @@ class TestePropriedades(unittest.TestCase):
         self.assertTrue(self.A.quadrada)
         self.assertTrue(self.B.quadrada)
         
+    def teste_simetria(self):
+        AS = Matriz([[1, 2], 
+                     [2, 1]])
+        self.assertFalse(self.A.simetrica)
+        self.assertTrue(AS.simetrica)
+        
 class TesteMultiplicacaoPorEscalar(unittest.TestCase):
     A = _2_x_2
     
