@@ -16,6 +16,16 @@ class Matriz(object):
         if self.linhas == other.linhas: return 0
         else: return 1
         
+    @property
+    def n(self): return len(self.linhas)
+    
+    @property
+    def m(self): return len(self.colunas)
+    
+    @property
+    def quadrada(self):
+        return self.n == self.m
+        
     def linha(self, n):
         return self.linhas[n]
         

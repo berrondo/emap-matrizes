@@ -1,10 +1,16 @@
 import unittest
 from matrices import Matriz
 
+_2_x_2 = Matriz([[1, 1], 
+                 [2, 2]])
+                 
+_3_x_3 = Matriz([['A', 'B', 'C'], 
+                ['D', 'E', 'F'],
+                ['G', 'H', 'I']])
+                
 class TesteMatriz_2_x_2(unittest.TestCase):
-    A = Matriz([[1, 1], 
-                [2, 2]])
-                    
+    A = _2_x_2
+
     def teste_linhas(self):
         self.assertEqual(self.A.linhas, [[1, 1], [2, 2]])
         self.assertEqual(self.A.linha(0), [1, 1])
@@ -23,11 +29,11 @@ class TesteMatriz_2_x_2(unittest.TestCase):
         AT = Matriz([[1, 2], 
                      [1, 2]])
         self.assertEqual(self.A.transposta(), AT)
+        
 
 class TesteMatriz_3_x_3(unittest.TestCase):
-    A = Matriz([['A', 'B', 'C'], 
-                ['D', 'E', 'F'],
-                ['G', 'H', 'I']])
+    A = _3_x_3
+                
     def teste_colunas_da_matriz_3_x_3(self):
         self.assertEqual(self.A.colunas, [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
         self.assertEqual(self.A.coluna(0), ['A', 'D', 'G'])
@@ -39,6 +45,22 @@ class TesteMatriz_3_x_3(unittest.TestCase):
                      ['B', 'E', 'H'], 
                      ['C', 'F', 'I']])
         self.assertEqual(self.A.transposta(), AT)
+        
+class TestePropriedades(unittest.TestCase):
+    A = _2_x_2
+    B = _3_x_3
+    
+    def teste_n(self):
+        self.assertEqual(self.A.n, 2)
+        self.assertEqual(self.B.n, 3)
+        
+    def teste_m(self):
+        self.assertEqual(self.A.m, 2)
+        self.assertEqual(self.B.m, 3)
+
+    def teste_quadrada(self):
+        self.assertTrue(self.A.quadrada)
+        self.assertTrue(self.B.quadrada)
         
         
 unittest.main()
