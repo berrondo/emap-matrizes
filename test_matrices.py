@@ -67,9 +67,8 @@ class TesteMultiplicacaoPorEscalar(unittest.TestCase):
     A = _2_x_2
     
     def teste_multiplicacao_por_escalar(self):
-        resultado = Matriz([[3, 6], 
-                            [9, 12]])
-                            
-        self.assertEqual(self.A.multiplicada_pelo_escalar(3), resultado)
+        _3xA = Matriz([[3, 6], 
+                       [9, 12]])
+        self.assertEqual(self.A.multiplicada_pelo_escalar(3), _3xA)
                             
 unittest.main()
