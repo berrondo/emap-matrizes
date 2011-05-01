@@ -1,20 +1,19 @@
 import unittest
 from matrices import Matriz
 
-class TesteMatriz(unittest.TestCase):
+class TesteMatriz_2_x_2(unittest.TestCase):
+    A = Matriz([[1, 1], 
+                [2, 2]])
+                    
     def teste_linhas(self):
-        A = Matriz([[1, 1], 
-                    [2, 2]])
-        self.assertEqual(A.linhas, [[1, 1], [2, 2]])
-        self.assertEqual(A.linha(0), [1, 1])
-        self.assertEqual(A.linha(1), [2, 2])
+        self.assertEqual(self.A.linhas, [[1, 1], [2, 2]])
+        self.assertEqual(self.A.linha(0), [1, 1])
+        self.assertEqual(self.A.linha(1), [2, 2])
         
     def teste_colunas(self):
-        A = Matriz([[1, 1], 
-                    [2, 2]])
-        self.assertEqual(A.colunas, [[1, 2], [1, 2]])
-        self.assertEqual(A.coluna(0), [1, 2])
-        self.assertEqual(A.coluna(1), [1, 2])
+        self.assertEqual(self.A.colunas, [[1, 2], [1, 2]])
+        self.assertEqual(self.A.coluna(0), [1, 2])
+        self.assertEqual(self.A.coluna(1), [1, 2])
         
     def teste_colunas_da_matriz_3_x_3(self):
         A = Matriz([['A', 'B', 'C'], 
@@ -35,17 +34,13 @@ class TesteMatriz(unittest.TestCase):
         self.assertEqual(A.transposta(), AT)
         
     def teste_comparacao(self):
-        A = Matriz([[1, 1], 
-                    [2, 2]])
-        B = A.transposta().transposta()
-        self.assertEqual(A, B)
+        B = self.A.transposta().transposta()
+        self.assertEqual(self.A, B)
         
     def teste_transposta(self):
-        A = Matriz([[1, 1], 
-                    [2, 2]])
         AT = Matriz([[1, 2], 
                      [1, 2]])
-        self.assertEqual(A.transposta(), AT)
+        self.assertEqual(self.A.transposta(), AT)
 
                     
         
