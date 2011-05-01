@@ -5,12 +5,13 @@ class Matriz(object):
         self.linhas = linhas
         
     def __repr__(self):
-        return '''
+        '''
             [
                 1,  2
                 1,  2
             ]
         '''
+        return str(self.linhas)
         
     def __cmp__(self, other):
         if self.linhas == other.linhas: return 0
@@ -42,3 +43,9 @@ class Matriz(object):
     def transposta(self):
         return Matriz(self.colunas)
         
+    def multiplicada_pelo_escalar(self, o_escalar):
+        linhas_multiplicadas = copy.deepcopy(self.linhas)
+        for i, linha in enumerate(self.linhas):
+            for j, elemento in enumerate(linha):
+                linhas_multiplicadas[i][j] = elemento * o_escalar
+        return Matriz(linhas_multiplicadas)

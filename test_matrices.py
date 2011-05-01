@@ -63,5 +63,13 @@ class TestePropriedades(unittest.TestCase):
         self.assertTrue(self.A.quadrada)
         self.assertTrue(self.B.quadrada)
         
-        
+class TesteMultiplicacaoPorEscalar(unittest.TestCase):
+    A = _2_x_2
+    
+    def teste_multiplicacao_por_escalar(self):
+        resultado = Matriz([[3, 6], 
+                            [9, 12]])
+                            
+        self.assertEqual(self.A.multiplicada_pelo_escalar(3), resultado)
+                            
 unittest.main()
