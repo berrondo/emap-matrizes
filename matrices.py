@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 import copy
 
 class Matriz(object):
@@ -18,8 +20,22 @@ class Matriz(object):
         else: return 1
         
     def __mul__(self, other):
+        ''' para i := 1 a n faça
+            para j := 1 a n faça
+            para k := 1 a m faça
+            c[i][j] := C[i][j] + A[i][k] * B[k][j]
+         '''
+        
         if self.m != other.m:
             raise
+        
+        produto = [[0, 0], [0, 0]]
+        for i, linha in enumerate(self.linhas):
+            for j, linha in enumerate(self.linhas):
+                for k, linha in enumerate(other.linhas):
+                    produto[i][j] = produto[i][j] + self.linhas[i][k] * other.linhas[k][j]
+        return Matriz(produto)
+
             
     def __add__(self, other):
         if self.dimensao != other.dimensao:
@@ -44,8 +60,7 @@ class Matriz(object):
     @property
     def simetrica(self): return self.linhas == self.transposta().linhas
         
-    def linha(self, n):
-        return self.linhas[n]
+    def linha(self, n): return self.linhas[n]
         
     @property
     def colunas(self):
@@ -55,11 +70,9 @@ class Matriz(object):
                 colunas[j][i] = elemento
         return colunas
         
-    def coluna(self, n):
-        return self.colunas[n]
+    def coluna(self, n): return self.colunas[n]
         
-    def transposta(self):
-        return Matriz(self.colunas)
+    def transposta(self): return Matriz(self.colunas)
         
     def multiplicada_pelo_escalar(self, o_escalar):
         linhas_multiplicadas = copy.deepcopy(self.linhas)

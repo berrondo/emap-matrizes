@@ -6,6 +6,9 @@ _2_x_2 = Matriz([[1, 2],
                  
 SIMETRICA = Matriz([[1, 2], 
                     [2, 1]])
+                    
+_2_x_2_X_SIMETRICA = Matriz([[5, 4], 
+                             [11, 10]])
                  
 _3_x_3 = Matriz([['A', 'B', 'C'], 
                  ['D', 'E', 'F'],
@@ -93,6 +96,7 @@ class TesteOperacoes(unittest.TestCase):
         
     def teste_multiplicacao(self):
         self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
+        self.assertEqual(_2_x_2 * SIMETRICA, _2_x_2_X_SIMETRICA)
 
 
                             
