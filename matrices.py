@@ -23,8 +23,7 @@ class Matriz(object):
     def m(self): return len(self.colunas)
     
     @property
-    def quadrada(self):
-        return self.n == self.m
+    def quadrada(self): return self.n == self.m
         
     def linha(self, n):
         return self.linhas[n]
