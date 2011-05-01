@@ -4,6 +4,9 @@ from matrices import Matriz
 _2_x_2 = Matriz([[1, 2], 
                  [3, 4]])
                  
+SIMETRICA = Matriz([[1, 2], 
+                    [2, 1]])
+                 
 _3_x_3 = Matriz([['A', 'B', 'C'], 
                  ['D', 'E', 'F'],
                  ['G', 'H', 'I']])
@@ -64,10 +67,13 @@ class TestePropriedades(unittest.TestCase):
         self.assertTrue(self.B.quadrada)
         
     def teste_simetria(self):
-        AS = Matriz([[1, 2], 
-                     [2, 1]])
+        self.AS = SIMETRICA
         self.assertFalse(self.A.simetrica)
-        self.assertTrue(AS.simetrica)
+        self.assertTrue(self.AS.simetrica)
+        
+    def teste_dimensoes(self):
+        self.assertEqual(self.A.dimensao, SIMETRICA.dimensao)
+        self.assertNotEqual(self.A.dimensao, self.B.dimensao)
         
 class TesteMultiplicacaoPorEscalar(unittest.TestCase):
     A = _2_x_2
@@ -76,5 +82,18 @@ class TesteMultiplicacaoPorEscalar(unittest.TestCase):
         _3xA = Matriz([[3, 6], 
                        [9, 12]])
         self.assertEqual(self.A.multiplicada_pelo_escalar(3), _3xA)
+        
+        
+class TesteOperacoes(unittest.TestCase):
+    def teste_soma(self):
+        self.assertRaises(TypeError, _2_x_2.__add__, _3_x_3)
+        
+    def teste_subtracao(self):
+        self.assertRaises(TypeError, _2_x_2.__sub__, _3_x_3)
+        
+    def teste_multiplicacao(self):
+        self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
+
+
                             
 unittest.main()

@@ -17,11 +17,26 @@ class Matriz(object):
         if self.linhas == other.linhas: return 0
         else: return 1
         
+    def __mul__(self, other):
+        if self.m != other.m:
+            raise
+            
+    def __add__(self, other):
+        if self.dimensao != other.dimensao:
+            raise
+            
+    def __sub__(self, other):
+        if self.dimensao != other.dimensao:
+            raise
+        
     @property
     def n(self): return len(self.linhas)
     
     @property
     def m(self): return len(self.colunas)
+    
+    @property
+    def dimensao(self): return (self.n, self.m)
     
     @property
     def quadrada(self): return self.n == self.m
