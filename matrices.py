@@ -1,4 +1,4 @@
-
+import copy
 
 class Matriz(object):
     def __init__(self, linhas):
@@ -20,9 +20,10 @@ class Matriz(object):
         return self.linhas[n]
         
     def colunas(self):
-        coluna0 = [self.linhas[0][0], self.linhas[1][0]]
-        coluna1 = [self.linhas[0][1], self.linhas[1][1]]
-        colunas = [coluna0, coluna1]
+        colunas = copy.deepcopy(self.linhas)
+        for i, linha in enumerate(self.linhas):
+            for j, elemento in enumerate(linha):
+                colunas[j][i] = elemento
         return colunas
         
     def coluna(self, n):
