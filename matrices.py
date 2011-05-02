@@ -33,9 +33,9 @@ class Matriz(object):
             raise
         
         produto = MatrizNula(self.n, other.m)
-        for i, linha in enumerate(self.linhas):
-            for j, linha in enumerate(self.linhas):
-                for k, linha in enumerate(other.linhas):
+        for i, linha in enumerate(self):
+            for j, linha in enumerate(self):
+                for k, linha in enumerate(other):
                     produto[i][j] = produto[i][j] + self[i][k] * other[k][j]
         return produto
 
@@ -44,7 +44,7 @@ class Matriz(object):
             raise
             
         soma = MatrizNula(self.n, self.m)
-        for i, linha in enumerate(soma.linhas):
+        for i, linha in enumerate(soma):
             for j, elemento in enumerate(linha):
                 soma[i][j] = self[i][j] + other[i][j]
         return soma 
@@ -54,7 +54,7 @@ class Matriz(object):
             raise
             
         diferenca = MatrizNula(self.n, self.m)
-        for i, linha in enumerate(diferenca.linhas):
+        for i, linha in enumerate(diferenca):
             for j, elemento in enumerate(linha):
                 diferenca[i][j] = self[i][j] - other[i][j]
         return diferenca
@@ -85,7 +85,7 @@ class Matriz(object):
     def simetrica(self):
         if not self.quadrada:
             raise TypeError
-        return self.linhas == self.transposta().linhas
+        return self == self.transposta()
         
     def diagonal_principal(self):
         if not self.quadrada:
@@ -101,11 +101,11 @@ class Matriz(object):
         if not self.quadrada:
             raise TypeError
         
-        diagonal_secundaria = []
+        secundaria = []
         for i, linha in enumerate(self):
             for j, elemento in enumerate(linha):
-                if i + j == self.ordem() - 1: diagonal_secundaria.append(elemento)
-        return diagonal_secundaria
+                if i+j == self.ordem()-1: secundaria.append(elemento)
+        return secundaria
 
     def linha(self, n): return self.linhas[n]
         
