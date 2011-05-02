@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-import copy
+from types import IntType
 
 class Matriz(object):
     def __init__(self, linhas):
@@ -26,15 +26,18 @@ class Matriz(object):
             c[i][j] := C[i][j] + A[i][k] * B[k][j]
          '''
         
+        if type(other) is IntType:
+            return self.vezes(other)
+        
         if self.m != other.m:
             raise
         
-        produto = MatrizNula(self.n, other.m).linhas
+        produto = MatrizNula(self.n, other.m)
         for i, linha in enumerate(self.linhas):
             for j, linha in enumerate(self.linhas):
                 for k, linha in enumerate(other.linhas):
-                    produto[i][j] = produto[i][j] + self.linhas[i][k] * other.linhas[k][j]
-        return Matriz(produto)
+                    produto[i][j] = produto[i][j] + self[i][k] * other[k][j]
+        return produto
 
     def __add__(self, other):
         if self.dimensao != other.dimensao:
@@ -43,7 +46,7 @@ class Matriz(object):
         soma = MatrizNula(self.n, self.m)
         for i, linha in enumerate(soma.linhas):
             for j, elemento in enumerate(linha):
-                soma.linhas[i][j] = self.linhas[i][j] + other.linhas[i][j]
+                soma[i][j] = self[i][j] + other[i][j]
         return soma 
             
     def __sub__(self, other):
@@ -53,7 +56,7 @@ class Matriz(object):
         diferenca = MatrizNula(self.n, self.m)
         for i, linha in enumerate(diferenca.linhas):
             for j, elemento in enumerate(linha):
-                diferenca.linhas[i][j] = self.linhas[i][j] - other.linhas[i][j]
+                diferenca[i][j] = self[i][j] - other[i][j]
         return diferenca
         
     def __getitem__(self, item):
@@ -103,22 +106,23 @@ class Matriz(object):
         
     @property
     def colunas(self):
-        colunas = MatrizNula(self.m, self.n).linhas
-        for i, linha in enumerate(self.linhas):
-            for j, elemento in enumerate(linha):
-                colunas[j][i] = elemento
-        return colunas
+        return self.transposta().linhas
         
     def coluna(self, m): return self.colunas[m]
         
-    def transposta(self): return Matriz(self.colunas)
-        
-    def multiplicada_pelo_escalar(self, o_escalar):
-        linhas_multiplicadas = copy.deepcopy(self.linhas)
+    def transposta(self):
+        transposta = MatrizNula(self.m, self.n)
         for i, linha in enumerate(self.linhas):
             for j, elemento in enumerate(linha):
-                linhas_multiplicadas[i][j] = elemento * o_escalar
-        return Matriz(linhas_multiplicadas)
+                transposta[j][i] = elemento
+        return transposta
+        
+    def vezes(self, escalar):
+        produto_escalar = MatrizNula(self.n, self.n)
+        for i, linha in enumerate(self.linhas):
+            for j, elemento in enumerate(linha):
+                produto_escalar[i][j] = elemento * escalar
+        return produto_escalar
         
         
 class MatrizNula(Matriz):

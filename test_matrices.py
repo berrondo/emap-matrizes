@@ -105,16 +105,13 @@ class TestePropriedades(unittest.TestCase):
         self.assertRaises(TypeError, _2_x_3_NULA.ordem)
         
         
-class TesteMultiplicacaoPorEscalar(unittest.TestCase):
-    A = _2_x_2
-    
-    def teste_multiplicacao_por_escalar(self):
-        _3xA = Matriz([[3, 6], 
-                       [9, 12]])
-        self.assertEqual(self.A.multiplicada_pelo_escalar(3), _3xA)
-        
-        
 class TesteOperacoes(unittest.TestCase):
+    def teste_multiplicacao_por_escalar(self):
+        self.assertEqual(Matriz([[1, 2], 
+                                 [3, 4]]) * 3, Matriz([[3, 6 ], 
+                                                       [9, 12]])
+                         )
+        
     def teste_soma(self):
         self.assertRaises(TypeError, _2_x_2.__add__, _3_x_3)
         self.assertEqual(_2_x_2 + _2_x_2_X_SIMETRICA, Matriz([[6, 6],
@@ -131,6 +128,13 @@ class TesteOperacoes(unittest.TestCase):
         
     def teste_acesso_a_item(self):
         self.assertEqual(_2_x_2[0][0], 1)
+        
+    def teste_atribuicao_a_item(self):
+        matriz = Matriz([[1, 2], 
+                         [3, 4]])
+        matriz[0][0] = 5
+        self.assertEqual(matriz, Matriz([[5, 2], 
+                                         [3, 4]]))
         
     def teste_diagonal_principal(self):
         self.assertRaises(TypeError, _2_x_3.diagonal_principal)
