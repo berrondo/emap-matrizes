@@ -54,7 +54,10 @@ class Matriz(object):
         for i, linha in enumerate(diferenca.linhas):
             for j, elemento in enumerate(linha):
                 diferenca.linhas[i][j] = self.linhas[i][j] - other.linhas[i][j]
-        return diferenca 
+        return diferenca
+        
+    def __getitem__(self, item):
+        return self.linhas[item]
         
     @property
     def n(self): return len(self.linhas)
@@ -106,7 +109,7 @@ class Matriz(object):
                 colunas[j][i] = elemento
         return colunas
         
-    def coluna(self, n): return self.colunas[n]
+    def coluna(self, m): return self.colunas[m]
         
     def transposta(self): return Matriz(self.colunas)
         

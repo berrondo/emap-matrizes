@@ -129,6 +129,9 @@ class TesteOperacoes(unittest.TestCase):
         self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
         self.assertEqual(_2_x_2 * SIMETRICA, _2_x_2_X_SIMETRICA)
         
+    def teste_acesso_a_item(self):
+        self.assertEqual(_2_x_2[0][0], 1)
+        
     def teste_diagonal_principal(self):
         self.assertRaises(TypeError, _2_x_3.diagonal_principal)
         self.assertEqual(_2_x_2.diagonal_principal(), [1, 4])
