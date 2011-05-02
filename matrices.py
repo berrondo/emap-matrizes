@@ -62,6 +62,9 @@ class Matriz(object):
     def __getitem__(self, item):
         return self.linhas[item]
         
+    def __iter__(self):
+        return iter(self.linhas)
+        
     @property
     def n(self): return len(self.linhas)
     
@@ -75,11 +78,13 @@ class Matriz(object):
     def quadrada(self): return self.n == self.m
     
     def ordem(self):
-        if not self.quadrada: raise TypeError
+        if not self.quadrada:
+            raise TypeError
         return self.n
     
     def simetrica(self):
-        if not self.quadrada: raise TypeError
+        if not self.quadrada:
+            raise TypeError
         return self.linhas == self.transposta().linhas
         
     def diagonal_principal(self):
@@ -87,7 +92,7 @@ class Matriz(object):
             raise TypeError
             
         diagonal_principal = []
-        for i, linha in enumerate(self.linhas):
+        for i, linha in enumerate(self):
             for j, elemento in enumerate(linha):
                 if i == j: diagonal_principal.append(elemento)
         return diagonal_principal
@@ -97,7 +102,7 @@ class Matriz(object):
             raise TypeError
         
         diagonal_secundaria = []
-        for i, linha in enumerate(self.linhas):
+        for i, linha in enumerate(self):
             for j, elemento in enumerate(linha):
                 if i + j == self.ordem() - 1: diagonal_secundaria.append(elemento)
         return diagonal_secundaria
@@ -112,14 +117,14 @@ class Matriz(object):
         
     def transposta(self):
         transposta = MatrizNula(self.m, self.n)
-        for i, linha in enumerate(self.linhas):
+        for i, linha in enumerate(self):
             for j, elemento in enumerate(linha):
                 transposta[j][i] = elemento
         return transposta
         
     def vezes(self, escalar):
         produto_escalar = MatrizNula(self.n, self.n)
-        for i, linha in enumerate(self.linhas):
+        for i, linha in enumerate(self):
             for j, elemento in enumerate(linha):
                 produto_escalar[i][j] = elemento * escalar
         return produto_escalar
