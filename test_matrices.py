@@ -1,5 +1,5 @@
 import unittest
-from matrices import Matriz
+from matrices import Matriz, MatrizNula
 
 _2_x_2 = Matriz([[1, 2], 
                  [3, 4]])
@@ -7,13 +7,19 @@ _2_x_2 = Matriz([[1, 2],
 SIMETRICA = Matriz([[1, 2], 
                     [2, 1]])
                     
-_2_x_2_X_SIMETRICA = Matriz([[5, 4], 
+_2_x_2_X_SIMETRICA = Matriz([[5,  4], 
                              [11, 10]])
                  
 _3_x_3 = Matriz([['A', 'B', 'C'], 
                  ['D', 'E', 'F'],
                  ['G', 'H', 'I']])
-                
+                 
+_2_x_3 = Matriz([['A', 'B', 'C'], 
+                 ['D', 'E', 'F']])
+                 
+_2_x_3_NULA = Matriz([[0, 0, 0],
+                      [0, 0, 0]])
+
 class TesteMatriz_2_x_2(unittest.TestCase):
     A = _2_x_2
 
@@ -41,17 +47,28 @@ class TesteMatriz_3_x_3(unittest.TestCase):
     A = _3_x_3
                 
     def teste_colunas_da_matriz_3_x_3(self):
-        self.assertEqual(self.A.colunas, [['A', 'D', 'G'], ['B', 'E', 'H'], ['C', 'F', 'I']])
+        self.assertEqual(self.A.colunas, [['A', 'D', 'G'], 
+                                          ['B', 'E', 'H'], 
+                                          ['C', 'F', 'I']])
         self.assertEqual(self.A.coluna(0), ['A', 'D', 'G'])
         self.assertEqual(self.A.coluna(1), ['B', 'E', 'H'])
         self.assertEqual(self.A.coluna(2), ['C', 'F', 'I'])
+        
+    def teste_colunas_da_matriz_2_x_3(self):
+        self.assertEqual(_2_x_3_NULA.colunas, [[0, 0], [0, 0], [0, 0]])
         
     def teste_transposta_da_matriz_3_x_3(self):
         AT = Matriz([['A', 'D', 'G'], 
                      ['B', 'E', 'H'], 
                      ['C', 'F', 'I']])
         self.assertEqual(self.A.transposta(), AT)
-        
+    
+    def teste_transposta_da_matriz_2_x_3(self):
+        AT = Matriz([['A', 'D'], 
+                     ['B', 'E'], 
+                     ['C', 'F']])
+        self.assertEqual(_2_x_3.transposta(), AT)
+
         
 class TestePropriedades(unittest.TestCase):
     A = _2_x_2
@@ -68,6 +85,7 @@ class TestePropriedades(unittest.TestCase):
     def teste_quadrada(self):
         self.assertTrue(self.A.quadrada)
         self.assertTrue(self.B.quadrada)
+        self.assertFalse(_2_x_3_NULA.quadrada)
         
     def teste_simetria(self):
         self.AS = SIMETRICA
@@ -77,6 +95,12 @@ class TestePropriedades(unittest.TestCase):
     def teste_dimensoes(self):
         self.assertEqual(self.A.dimensao, SIMETRICA.dimensao)
         self.assertNotEqual(self.A.dimensao, self.B.dimensao)
+        
+    def teste_ordem(self):
+        self.assertEqual(self.A.ordem, 2)
+        self.assertEqual(self.B.ordem, 3)
+        self.assertEqual(None, _2_x_3_NULA.ordem)
+        
         
 class TesteMultiplicacaoPorEscalar(unittest.TestCase):
     A = _2_x_2
@@ -98,6 +122,12 @@ class TesteOperacoes(unittest.TestCase):
         self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
         self.assertEqual(_2_x_2 * SIMETRICA, _2_x_2_X_SIMETRICA)
 
+        
+class TesteMatrizNula(unittest.TestCase):
+    def test_criacao_matriz_nula(self):
+        N = Matriz([[0, 0],
+                    [0, 0]])
+        self.assertEqual(MatrizNula(2, 2), N)
+        self.assertEqual(MatrizNula(2, 3), _2_x_3_NULA)
 
-                            
 unittest.main()
