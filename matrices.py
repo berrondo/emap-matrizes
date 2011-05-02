@@ -56,14 +56,34 @@ class Matriz(object):
     @property
     def quadrada(self): return self.n == self.m
     
-    @property
     def ordem(self):
-        if self.quadrada: return self.n
-        return None
+        if not self.quadrada: raise TypeError
+        return self.n
     
-    @property
-    def simetrica(self): return self.linhas == self.transposta().linhas
+    def simetrica(self):
+        if not self.quadrada: raise TypeError
+        return self.linhas == self.transposta().linhas
         
+    def diagonal_principal(self):
+        if not self.quadrada:
+            raise TypeError
+            
+        diagonal_principal = []
+        for i, linha in enumerate(self.linhas):
+            for j, elemento in enumerate(linha):
+                if i == j: diagonal_principal.append(elemento)
+        return diagonal_principal
+         
+    def diagonal_secundaria(self):
+        if not self.quadrada:
+            raise TypeError
+        
+        diagonal_secundaria = []
+        for i, linha in enumerate(self.linhas):
+            for j, elemento in enumerate(linha):
+                if i + j == self.ordem() - 1: diagonal_secundaria.append(elemento)
+        return diagonal_secundaria
+
     def linha(self, n): return self.linhas[n]
         
     @property

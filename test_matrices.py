@@ -17,6 +17,9 @@ _3_x_3 = Matriz([['A', 'B', 'C'],
 _2_x_3 = Matriz([['A', 'B', 'C'], 
                  ['D', 'E', 'F']])
                  
+_2_x_2_NULA = Matriz([[0, 0],
+                      [0, 0]])
+
 _2_x_3_NULA = Matriz([[0, 0, 0],
                       [0, 0, 0]])
 
@@ -89,17 +92,17 @@ class TestePropriedades(unittest.TestCase):
         
     def teste_simetria(self):
         self.AS = SIMETRICA
-        self.assertFalse(self.A.simetrica)
-        self.assertTrue(self.AS.simetrica)
+        self.assertFalse(self.A.simetrica())
+        self.assertTrue(self.AS.simetrica())
         
     def teste_dimensoes(self):
         self.assertEqual(self.A.dimensao, SIMETRICA.dimensao)
         self.assertNotEqual(self.A.dimensao, self.B.dimensao)
         
     def teste_ordem(self):
-        self.assertEqual(self.A.ordem, 2)
-        self.assertEqual(self.B.ordem, 3)
-        self.assertEqual(None, _2_x_3_NULA.ordem)
+        self.assertEqual(self.A.ordem(), 2)
+        self.assertEqual(self.B.ordem(), 3)
+        self.assertRaises(TypeError, _2_x_3_NULA.ordem)
         
         
 class TesteMultiplicacaoPorEscalar(unittest.TestCase):
@@ -121,13 +124,19 @@ class TesteOperacoes(unittest.TestCase):
     def teste_multiplicacao(self):
         self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
         self.assertEqual(_2_x_2 * SIMETRICA, _2_x_2_X_SIMETRICA)
+        
+    def teste_diagonal_principal(self):
+        self.assertRaises(TypeError, _2_x_3.diagonal_principal)
+        self.assertEqual(_2_x_2.diagonal_principal(), [1, 4])
+        
+    def teste_diagonal_secundaria(self):
+        self.assertRaises(TypeError, _2_x_3.diagonal_secundaria)
+        self.assertEqual(_2_x_2.diagonal_secundaria(), [2, 3])
 
         
 class TesteMatrizNula(unittest.TestCase):
     def test_criacao_matriz_nula(self):
-        N = Matriz([[0, 0],
-                    [0, 0]])
-        self.assertEqual(MatrizNula(2, 2), N)
+        self.assertEqual(MatrizNula(2, 2), _2_x_2_NULA)
         self.assertEqual(MatrizNula(2, 3), _2_x_3_NULA)
 
 unittest.main()
