@@ -40,9 +40,21 @@ class Matriz(object):
         if self.dimensao != other.dimensao:
             raise
             
+        soma = MatrizNula(self.n, self.m)
+        for i, linha in enumerate(soma.linhas):
+            for j, elemento in enumerate(linha):
+                soma.linhas[i][j] = self.linhas[i][j] + other.linhas[i][j]
+        return soma 
+            
     def __sub__(self, other):
         if self.dimensao != other.dimensao:
             raise
+            
+        diferenca = MatrizNula(self.n, self.m)
+        for i, linha in enumerate(diferenca.linhas):
+            for j, elemento in enumerate(linha):
+                diferenca.linhas[i][j] = self.linhas[i][j] - other.linhas[i][j]
+        return diferenca 
         
     @property
     def n(self): return len(self.linhas)

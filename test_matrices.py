@@ -117,9 +117,13 @@ class TesteMultiplicacaoPorEscalar(unittest.TestCase):
 class TesteOperacoes(unittest.TestCase):
     def teste_soma(self):
         self.assertRaises(TypeError, _2_x_2.__add__, _3_x_3)
+        self.assertEqual(_2_x_2 + _2_x_2_X_SIMETRICA, Matriz([[6, 6],
+                                                              [14, 14]]))
         
     def teste_subtracao(self):
         self.assertRaises(TypeError, _2_x_2.__sub__, _3_x_3)
+        self.assertEqual(_2_x_2 - _2_x_2_X_SIMETRICA, Matriz([[-4, -2],
+                                                              [-8, -6]]))
         
     def teste_multiplicacao(self):
         self.assertRaises(TypeError, _2_x_2.__mul__, _3_x_3)
